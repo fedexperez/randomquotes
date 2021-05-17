@@ -6,20 +6,36 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    public static $quotes = array("The Black Knight Always Triumphs! - Monty Python", 
-        "Anyone who has never made a mistake has never tried anything new - Albert Einstein",
-        "Never Stop Exploring - The North Face",
-        "Be yourself; everyone else is already taken - Oscar Wilde",
-        "So many books, so little time - Frank Zappa",
-        "Be the change that you wish to see in the world - Mahatma Gandhi",
+    public static $quotes = array(
+        "https://memesrandomtopicos.s3.amazonaws.com/meme1.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme2.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme1.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme3.jpeg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme4.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme5.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme6.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme7.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme8.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme9.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme10.png",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme11.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme12.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme13.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme14.jpg",
+        "https://memesrandomtopicos.s3.amazonaws.com/meme15.jpg",
     );
 
     public function index()
     {
+        $data = [];
         $totalQuotes = (count(Controller::$quotes));
         $randomNumber = (rand(0,($totalQuotes-1)));
-        $randomQuote = Controller::$quotes[$randomNumber];
-        return response()->json(['quote' => $randomQuote, 'server_ip' => gethostbyname(gethostname())]);
+        $randomimage = Controller::$quotes[$randomNumber];
+
+        $data['randomimage'] = $randomimage;
+        $data['server_ip'] = gethostbyname(gethostname());
+
+        return view('image')->with('data', $data);
     }
 
     
